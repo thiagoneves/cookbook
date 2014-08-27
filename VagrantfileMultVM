@@ -1,0 +1,53 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  ##############################################
+  # WEB
+  ##############################################
+  config.vm.define :web do |web|
+    web.vm.box = "hashicorp/precise64"
+    web.vm.box_url = "http://files.vagrantup.com/precise64_vmware_fusion.box"
+
+    web.vm.host_name = "web"
+
+    # VM config
+    web.vm.provider "vmware_fusion" do |v|
+      v.vmx["numvcpus"] = "1"
+      v.vmx["memsize"] = "1024"
+      
+      # Performance 
+      v.vmx["MemTrimRate"] = "0"
+      v.vmx["sched.mem.pshare.enable"] = "FALSE"
+    end
+
+    # IP
+    web.vm.network "private_network", ip: "192.168.50.4"
+
+  end
+
+  ##############################################
+  # DB
+  ##############################################
+  config.vm.define "db" do |db|
+    db.vm.box = "hashicorp/precise64"
+    db.vm.box_url = "http://files.vagrantup.com/precise64_vmware_fusion.box"
+
+    db.vm.host_name = "db"
+
+    # VM config
+    db.vm.provider "vmware_fusion" do |v|
+      v.vmx["numvcpus"] = "1"
+      v.vmx["memsize"] = "1024"
+      
+      # Performance 
+      v.vmx["MemTrimRate"] = "0"
+      v.vmx["sched.mem.pshare.enable"] = "FALSE"
+    end
+
+    # IP
+    db.vm.network "private_network", ip: "192.168.50.5"
+
+  end
+
+end
