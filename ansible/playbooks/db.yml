@@ -1,0 +1,14 @@
+- hosts: db
+  gather_facts: no
+  sudo: yes
+
+  tasks:
+    - name: Install PostgreSQL
+      apt: >
+        cache_valid_time=3600
+        update_cache=yes
+        state=latest
+        name=postgresql
+      tags:
+        - database
+        - postgresql

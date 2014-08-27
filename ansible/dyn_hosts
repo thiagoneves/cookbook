@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require "json"
+
+payload = {
+	_meta: {
+
+	    hostvars: {
+			"192.168.3.139" => {
+				ansible_ssh_user: "vagrant",
+				ansible_ssh_pass: "vagrant"
+			},
+
+			"192.168.3.140" => {
+				ansible_ssh_user: "vagrant",
+				ansible_ssh_pass: "vagrant"
+			}
+	    }
+
+  	},
+
+	app: {
+		hosts: %w[192.168.3.139]
+	},
+
+	db: {
+		hosts: %w[192.168.3.140]
+	},
+
+	production: {
+		children: %w[app db]
+	}
+
+}
+
+puts JSON.dump(payload)

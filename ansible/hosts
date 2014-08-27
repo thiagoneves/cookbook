@@ -1,0 +1,17 @@
+[app]
+192.168.3.139
+
+[web]
+192.168.3.139
+
+[db]
+192.168.3.140
+
+[production:children]
+app
+web
+db
+
+[production:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant

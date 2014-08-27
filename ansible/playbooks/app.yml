@@ -1,0 +1,2 @@
+- hosts: app
+  gather_facts: no
